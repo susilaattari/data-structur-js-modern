@@ -69,6 +69,72 @@ const restaurant = {
 
 /*
 =========================================================
+====== Short Circuitng  ==================
+=========================================================
+*/
+// console.log('========OR========');
+// logic OR (||) yaitu : jika dia sudah menemukan type data yang benar maka dia langsung mennampilkannya dan akan mengabaikan type data selanjutnya
+// console.log(23 || 'Susila'); // 23
+// console.log(0 || 10); // 10
+// console.log(undefined || 0); // 0
+
+// console.log(0 || undefined || null || 'Susila' || 98);
+
+// restaurant.pelanggan = 0;
+// mencari nilai default jika undefined/null/0 maka akan memberi angka 23
+// const pelanggan = restaurant.pelanggan ? restaurant.pelanggan : 23; //ini menggunakan IF ternary
+// console.log(pelanggan);
+// const pelanggan2 = restaurant.pelanggan || 23; //ini menggunakan circuiting
+// console.log(pelanggan2);
+
+// console.log('========AND========');
+// console.log(
+//   restaurant.pelanggan && restaurant.orderFizza('daging kambing', 'daging unta')
+// );
+
+// studi kasus
+////======== DENGAN IF ======== /////
+
+// if (restaurant.orderFizza) {
+//   restaurant.orderFizza('telor dadar', 'sosis ayam', 'rumput laut');
+// }
+
+////======== DENGAN Circuiting AND ======== /////
+// restaurant.orderFizza &&
+//   restaurant.orderFizza('telor dadar', 'sosis ayam', 'rumput laut');
+
+// console.log('========??========');
+// const pelanggan3 = restaurant.pelanggan ?? 10;
+// console.log(pelanggan3);
+
+// const rest1 = {
+//   nama: 'Susila-Food',
+//   tamu: 0,
+// };
+// const rest2 = {
+//   nama: 'Delis-Food',
+//   pemilik: 'delis',
+// };
+// OR assignment operator (0,undefined,null)
+
+// rest1.tamu = rest1.tamu || 10;
+// rest2.tamu ||= 10;
+
+// OR assignment operator (undefined,null)
+
+// rest1.tamu = rest1.tamu ?? 10;
+// rest2.tamu ??= 10;
+
+// AND assignment operator
+
+// rest1.pemilik &&= '<ANONYNUS>';
+// rest2.pemilik &&= '<ANONYNUS>';
+
+// console.log(rest1);
+// console.log(rest2);
+
+/*
+=========================================================
 ====== Rest Pattern/pola And Parameter ==================
 =========================================================
 */
@@ -104,32 +170,32 @@ const restaurant = {
 
 // function parameters
 
-const add = function (num, ...numbers) {
-  let sum = num; //3
-  if (numbers.length == 0) {
-    console.log('parameter kedua kosong :', numbers);
-    return;
-  } else {
-    for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-    console.log(sum);
-  }
-};
+// const add = function (num, ...numbers) {
+//   let sum = num; //3
+//   if (numbers.length == 0) {
+//     console.log('parameter kedua kosong :', numbers);
+//     return;
+//   } else {
+//     for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//     console.log(sum);
+//   }
+// };
 
-add(3, 2, 3, 5, 7);
-add(3); // jika parameter ke 2 tidak di masukan maka akan mengembalikan array = []
+// add(3, 2, 3, 5, 7);
+// add(3); // jika parameter ke 2 tidak di masukan maka akan mengembalikan array = []
 
 // study kasus
 // restaurant.orderFizza('bawang Bombai', 'sosis', 'bakso', 'jamur');
 // restaurant.orderFizza('bawang Bombai');
 
-const pesanToping = ['sosis', 'bakso', 'otak otak'];
-const pesanToping1 = ['mie', 'bawang', 'spagethi'];
+// const pesanToping = ['sosis', 'bakso', 'otak otak'];
+// const pesanToping1 = ['mie', 'bawang', 'spagethi'];
 
-restaurant.orderFizza(...pesanToping, ...pesanToping1);
-// ('sosis', 'bakso', 'otak otak','mie', 'bawang', 'spagethi')
-console.log('===================================');
-restaurant.orderFizza(pesanToping, ...pesanToping1);
-// (['sosis', 'bakso', 'otak otak'],'mie', 'bawang', 'spagethi')
+// restaurant.orderFizza(...pesanToping, ...pesanToping1);
+// // ('sosis', 'bakso', 'otak otak','mie', 'bawang', 'spagethi')
+// console.log('===================================');
+// restaurant.orderFizza(pesanToping, ...pesanToping1);
+// // (['sosis', 'bakso', 'otak otak'],'mie', 'bawang', 'spagethi')
 
 /*
 =========================================================
@@ -264,3 +330,107 @@ restaurant.orderPasta(...ingrediens);
 
 // console.log(start);
 // console.log(main);
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+/* 
+Kami sedang membangun aplikasi taruhan sepak bola (sepak bola untuk teman-teman Amerika saya )!
+
+Misalkan kita mendapatkan data dari layanan web tentang game tertentu (di bawah). Dalam tantangan ini kita akan bekerja dengan data. Jadi inilah tugas Anda:
+
+1. Buat satu array pemain untuk setiap tim (variabel 'players1' dan 'players2')
+2. Pemain pertama dalam susunan pemain mana pun adalah penjaga gawang dan yang lainnya adalah pemain lapangan. Untuk Bayern Munich (tim 1) buat satu variabel ('gk') dengan nama penjaga gawang, dan satu larik ('fieldPlayers') dengan 10 pemain lapangan yang tersisa
+3. Buat array 'allPlayers' yang berisi semua pemain dari kedua tim (22 pemain)
+4. Selama pertandingan, Bayern Munich (tim 1) menggunakan 3 pemain pengganti. Jadi buat array baru ('players1Final') yang berisi semua pemain team1 asli ditambah 'Thiago', 'Coutinho' dan 'Perisic'
+5. Berdasarkan objek game.odds, buat satu variabel untuk setiap ganjil (disebut 'team1', 'draw' dan 'team2')
+6. Tulis fungsi ('printGoals') yang menerima jumlah nama pemain yang berubah-ubah (BUKAN array) dan mencetaknya masing-masing ke konsol, bersama dengan jumlah total gol yang dicetak (jumlah nama pemain yang masuk )
+7. Tim dengan odds yang lebih rendah lebih mungkin untuk menang. Cetak ke konsol tim mana yang lebih mungkin menang, TANPA menggunakan pernyataan if/else atau operator ternary.
+
+DATA UJI UNTUK 6: Gunakan pemain 'Davies', 'Muller', 'Lewandowski' dan 'Kimmich'. Kemudian, panggil fungsi lagi dengan pemain dari game.scored
+
+GOOD LUCK 😀
+*/
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// 1. Buat satu array pemain untuk setiap tim (variabel 'players1' dan 'players2')
+// const players1 = game.players[0];
+// const players2 = game.players[1];
+const [players1, players2] = game.players;
+// console.log(players1, players2);
+
+// 2. Pemain pertama dalam susunan pemain mana pun adalah penjaga gawang dan yang lainnya adalah pemain lapangan. Untuk Bayern Munich (tim 1) buat satu variabel ('gk') dengan nama penjaga gawang, dan satu larik ('fieldPlayers') dengan 10 pemain lapangan yang tersisa
+const [gk, ...fieldPlayers] = players1;
+// console.log(gk, fieldPlayers);
+
+// 3. Buat array 'allPlayers' yang berisi semua pemain dari kedua tim (22 pemain)
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+// 4. Selama pertandingan, Bayern Munich (tim 1) menggunakan 3 pemain pengganti. Jadi buat array baru ('players1Final') yang berisi semua pemain team1 asli ditambah 'Thiago', 'Coutinho' dan 'Perisic'
+
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+console.log(players1Final);
+
+// 5. Berdasarkan objek game.odds, buat satu variabel untuk setiap ganjil (disebut 'team1', 'draw' dan 'team2')
+
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+
+console.log(team1, draw, team2);
+
+// 6. Tulis fungsi ('printGoals') yang menerima jumlah nama pemain yang berubah-ubah (BUKAN array) dan mencetaknya masing-masing ke konsol, bersama dengan jumlah total gol yang dicetak (jumlah nama pemain yang masuk )
+
+const printGoals = function (...players1) {
+  console.log('Pemain Yang Mencetak Goal:', players1);
+  console.log('JUmlah Goals:', players1.length);
+};
+
+printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+printGoals(...game.scored);
+
+// 7. Tim dengan odds yang lebih rendah, lebih mungkin untuk menang. Cetak ke konsol tim mana yang lebih mungkin menang, TANPA menggunakan pernyataan if/else atau operator ternary.
+
+team1 < team2 && console.log('team 1 memenangkan pertandingan');
+team1 > team2 && console.log('team 2 memenangkan pertandingan');
